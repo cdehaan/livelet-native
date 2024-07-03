@@ -8,7 +8,7 @@ export default function Index() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <UserProvider>      
+    <UserProvider>
       <View style={{ flex: 1 }}>
         {isLoggedIn ? (
           <Menu onLogout={setIsLoggedIn} />
