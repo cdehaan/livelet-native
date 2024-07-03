@@ -1,3 +1,11 @@
+
+////////////////////////////////////////
+// Rika-san:
+// This is currently not being used
+// Ignore this file for now
+////////////////////////////////////////
+
+
 import axios, { AxiosRequestHeaders } from "axios";
 const queryString = require("query-string");
 //import { store, resetAuth, updateSnackBar } from "@redux";
