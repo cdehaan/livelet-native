@@ -2,7 +2,7 @@ import axios, { AxiosRequestHeaders } from "axios";
 const queryString = require("query-string");
 //import { store, resetAuth, updateSnackBar } from "@redux";
 // config axios
-const API_URL = "";
+const API_URL = "https://livelet-api.adamo.tech/";
 const axiosClient = axios.create({
     baseURL: API_URL,
     headers: {
