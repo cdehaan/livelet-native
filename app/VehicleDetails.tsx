@@ -3,10 +3,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '@/contexts/UserContext';
 import { AntDesign } from '@expo/vector-icons';
 
-const VehicleDetails = (vehicleId: { handleVehicleId: (arg0: null) => void; vehicleId: any; }) => {
+const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, handleVehicleId: any }) => {
 
   const handleChange = (event: any) => {
-    vehicleId.handleVehicleId(null);
+    handleVehicleId(null);
   };
 
   if (!vehicleId) return null;
@@ -18,7 +18,7 @@ const VehicleDetails = (vehicleId: { handleVehicleId: (arg0: null) => void; vehi
     const fetchData = async () => {
       if (token) {
         try {
-          const response = await fetch(`https://livelet-api.adamo.tech/api/vehicleItem-detail/${vehicleId.vehicleId}/`, {
+          const response = await fetch(`https://livelet-api.adamo.tech/api/vehicleItem-detail/${vehicleId}/`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
