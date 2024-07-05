@@ -8,10 +8,6 @@ const Menu = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => {
   const [vehicles, setVehicles] = useState([]);
   const [vehicleId, setVehicleId] = useState<number | null>(null);
 
-  const handleVehicleId = (id: number | null) => {
-    setVehicleId(id);
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       if (token) {
