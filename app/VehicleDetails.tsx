@@ -4,7 +4,7 @@ import { UserContext } from '@/contexts/UserContext';
 import { AntDesign } from '@expo/vector-icons';
 
 const VehicleDetails = ({ vehicleId, setVehicleId }: { vehicleId: number, setVehicleId: any }) => {
-  const { token, setToken } = useContext(UserContext);
+  const { token } = useContext(UserContext);
   const [vehicle, setVehicle] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
