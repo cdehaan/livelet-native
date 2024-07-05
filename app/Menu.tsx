@@ -1,10 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, Button, Image, ScrollView } from 'react-native';
+import { View, Text, Button, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { UserContext } from '@/contexts/UserContext';
+import VehicleDetails from './VehicleDetails';
 
 const Menu = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => {
   const { token, setToken } = useContext(UserContext);
   const [vehicles, setVehicles] = useState([]);
+  const [vehicleId, setVehicleId] = useState<number | null>(null);
+
+  const handleVehicleId = (id: number | null) => {
+    setVehicleId(id);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,33 +36,39 @@ const Menu = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => {
     fetchData();
   }, [token]);
 
-  const vehiclesList = vehicles.map((vehicle: any) => (
-    <View key={vehicle.id} style={{
-      width: "60%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
-      padding: 7
-    }}>
-      <View style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
-        <Image
-          style={{ width: 50, height: 50 }}
-          source={{ uri: vehicle.image.path }}
-        />
-        <Text>{vehicle.name}</Text>
-      </View>
-      <Text>Available: {vehicle.borrowing ? "✗" : "✔"}, Late: {vehicle.isLate ? "✔" : "✗"}</Text>
-    </View>
-  ));
+  const vehiclesList = vehicles.map((vehicle: any) => {
+
+    return (
+      <TouchableOpacity key={vehicle.id} style={{
+        width: "70%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
+        padding: 7
+      }} onPress={() => setVehicleId(vehicle.id)}>
+        <View style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
+          <Image
+            style={{ width: 50, height: 50 }}
+            source={{ uri: vehicle.image.path }}
+          />
+          <Text>{vehicle.name}</Text>
+        </View>
+        <Text>Available: {vehicle.borrowing ? "✗" : "✔"}, Late: {vehicle.isLate ? "✔" : "✗"}</Text>
+      </TouchableOpacity>
+    )
+  });
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Menu</Text>
-      <Button title="Logout" onPress={() => { setToken(null); onLogout(false); }} />
-      <Text>Your token: {token ? (token.substring(0, 20) + "...") : 'Unknown'}</Text>
-      <View style={{ flex: 1, width: '100%' }}>
-        <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
-          {vehiclesList}
-        </ScrollView>
+    <>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingTop: 30 }}>
+        <Text>Menu</Text>
+        <Button title="Logout" onPress={() => { setToken(null); onLogout(false); }} />
+        <Text>Your token: {token ? (token.substring(0, 20) + "...") : 'Unknown'}</Text>
+        <View style={{ flex: 1, width: '100%' }}>
+          <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+            {vehiclesList}
+          </ScrollView>
+        </View>
       </View>
-    </View>
+      {vehicleId === null ? null : <VehicleDetails handleVehicleId={handleVehicleId} />}
+    </>
   );
 };
 
