@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, TouchableOpacity, Modal, ActivityIndicator } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '@/contexts/UserContext';
 import { AntDesign } from '@expo/vector-icons';
@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, handleVehicleId: any }) => {
   const { token, setToken } = useContext(UserContext);
   const [vehicle, setVehicle] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = () => {
     handleVehicleId(null);
@@ -30,6 +31,7 @@ const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, han
           const data = await response.json();
           console.log('Response data:', data.data);
           setVehicle(data.data);
+          setIsLoading(true);
 
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -40,15 +42,25 @@ const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, han
     fetchData();
   }, [token]);
 
+  const loadingMessage = (
+    <View>
+      <ActivityIndicator size={"large"} color='red' />
+      <Text style={{ textAlign: 'center' }}>Loading...</Text>
+    </View>
+  );
+
   return (
-    <Modal animationType='slide' transparent={false} >
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <TouchableOpacity onPress={() => handleChange(null)}>
-          <AntDesign name="close" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={{ textAlign: 'center', marginVertical: 5 }}>VehicleDetails</Text>
-        <Text>{vehicle.category}</Text>
-        <Text>{vehicle.title}</Text>
+    <Modal animationType='slide' transparent={true} >
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.7)', }}>
+        <View style={{ width: "70%", borderColor: "#888", borderWidth: 1, padding: 7, borderRadius: 12, backgroundColor: 'white' }}>
+          <TouchableOpacity onPress={handleChange} style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
+            <AntDesign name="close" size={24} color="black" />
+          </TouchableOpacity>
+          <Text style={{ textAlign: 'center', marginVertical: 7, fontWeight: 'bold' }}>VehicleDetails</Text>
+          {!isLoading && loadingMessage}
+          <Text style={{ textAlign: 'center' }}>{vehicle.category}</Text>
+          <Text style={{ textAlign: 'center', marginBottom: 5 }}>{vehicle.title}</Text>
+        </View>
       </View>
 
 
