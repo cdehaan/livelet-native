@@ -67,7 +67,7 @@ const Menu = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => {
           </ScrollView>
         </View>
       </View>
-      {vehicleId === null ? null : <VehicleDetails vehicleId={vehicleId} handleVehicleId={handleVehicleId} />}
+      {vehicleId === null ? null : <VehicleDetails vehicleId={vehicleId} setVehicleId={setVehicleId} />}
     </>
   );
 };

@@ -3,14 +3,10 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '@/contexts/UserContext';
 import { AntDesign } from '@expo/vector-icons';
 
-const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, handleVehicleId: any }) => {
+const VehicleDetails = ({ vehicleId, setVehicleId }: { vehicleId: number, setVehicleId: any }) => {
   const { token, setToken } = useContext(UserContext);
   const [vehicle, setVehicle] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleChange = () => {
-    handleVehicleId(null);
-  };
 
   if (!vehicleId) return null;
   console.log(vehicleId);
@@ -53,7 +49,7 @@ const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, han
     <Modal animationType='slide' transparent={true} >
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.7)', }}>
         <View style={{ width: "70%", borderColor: "#888", borderWidth: 1, padding: 7, borderRadius: 12, backgroundColor: 'white' }}>
-          <TouchableOpacity onPress={handleChange} style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
+          <TouchableOpacity onPress={() => {setVehicleId(null)}} style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
             <AntDesign name="close" size={24} color="black" />
           </TouchableOpacity>
           <Text style={{ textAlign: 'center', marginVertical: 7, fontWeight: 'bold' }}>VehicleDetails</Text>
