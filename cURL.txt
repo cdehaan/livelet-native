@@ -1,0 +1,10 @@
+curl -X GET "https://livelet-api.adamo.tech/api/search-vehicle/" \
+     -H "Content-Type: application/json" \
+     -H "X-Requested-With: XMLHttpRequest" \
+     -H "Authorization: Bearer 1955|fY7[...]Kdk"
+
+
+curl -X GET "https://livelet-api.adamo.tech/api/vehicleItem-detail/10" \
+     -H "Content-Type: application/json" \
+     -H "X-Requested-With: XMLHttpRequest" \
+     -H "Authorization: Bearer 1955|fY7[...]Kdk"
