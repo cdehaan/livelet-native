@@ -4,15 +4,16 @@ import { UserContext } from '@/contexts/UserContext';
 import { AntDesign } from '@expo/vector-icons';
 
 const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, handleVehicleId: any }) => {
+  const { token, setToken } = useContext(UserContext);
+  const [vehicle, setVehicle] = useState([]);
 
-  const handleChange = (event: any) => {
+  const handleChange = () => {
     handleVehicleId(null);
   };
 
   if (!vehicleId) return null;
   console.log(vehicleId);
 
-  const { token, setToken } = useContext(UserContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +29,7 @@ const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, han
           });
           const data = await response.json();
           console.log('Response data:', data.data);
+          setVehicle(data.data);
 
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -44,7 +46,9 @@ const VehicleDetails = ({ vehicleId, handleVehicleId }: { vehicleId: number, han
         <TouchableOpacity onPress={() => handleChange(null)}>
           <AntDesign name="close" size={24} color="black" />
         </TouchableOpacity>
-        <Text>VehicleDetails</Text>
+        <Text style={{ textAlign: 'center', marginVertical: 5 }}>VehicleDetails</Text>
+        <Text>{vehicle.category}</Text>
+        <Text>{vehicle.title}</Text>
       </View>
 
 
