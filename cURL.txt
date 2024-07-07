@@ -8,3 +8,28 @@ curl -X GET "https://livelet-api.adamo.tech/api/vehicleItem-detail/10" \
      -H "Content-Type: application/json" \
      -H "X-Requested-With: XMLHttpRequest" \
      -H "Authorization: Bearer 1955|fY7[...]Kdk"
+
+curl -X GET "https://livelet-api.adamo.tech/api/vehicleItem-history/10" \
+     -H "Content-Type: application/json" \
+     -H "X-Requested-With: XMLHttpRequest" \
+     -H "Authorization: Bearer 1955|fY7[...]Kdk"
+
+curl -X GET "https://livelet-api.adamo.tech/api/vehicleItem-history/10/3195" \
+     -H "Content-Type: application/json" \
+     -H "X-Requested-With: XMLHttpRequest" \
+     -H "Authorization: Bearer 1955|fY7[...]Kdk"
+
+
+
+curl -X POST "https://livelet-api.adamo.tech/api/borrowing-vehicleItem/20" \
+     -H "Content-Type: application/json" \
+     -H "X-Requested-With: XMLHttpRequest" \
+     -H "Authorization: Bearer 1955|fY7[...]Kdk" \
+     -d '{"construction_id": "3", "from": "2024-07-10", "quantity": 1, "to": "2024-07-11"}'
+
+curl -X POST "https://livelet-api.adamo.tech/api/returned-item/3583" \
+     -H "Content-Type: application/json" \
+     -H "X-Requested-With: XMLHttpRequest" \
+     -H "Authorization: Bearer 1955|fY7[...]Kdk" \
+     -d '{"quantity": 1, "construction_id": 3}'
+
