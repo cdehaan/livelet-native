@@ -3,10 +3,11 @@ import { View, Text, ActivityIndicator, Button, StyleSheet } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '@/contexts/UserContext';
 import { useRouter, useLocalSearchParams } from 'expo-router';
+import { VehicleType } from '@/types';
 
 const VehicleDetails = () => {
   const { token } = useContext(UserContext);
-  const [vehicle, setVehicle] = useState([]);
+  const [vehicle, setVehicle] = useState<VehicleType | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id } = useLocalSearchParams();
@@ -42,6 +43,8 @@ const VehicleDetails = () => {
       <Text style={{ textAlign: 'center' }}>Loading...</Text>
     </View>
   );
+
+  if (!vehicle) return null;
 
   return (
     <View style={styles.container}>
