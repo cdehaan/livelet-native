@@ -1,19 +1,15 @@
 import { View, Text, TouchableOpacity, Modal, ActivityIndicator, Button, StyleSheet } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '@/contexts/UserContext';
-import { AntDesign } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 
-const VehicleDetails = ({ vehicleId }: { vehicleId: number }) => {
+const vehicleDetails = () => {
   // const VehicleDetails = ({ vehicleId, setVehicleId }: { vehicleId: number, setVehicleId: any }) => {
   const { token } = useContext(UserContext);
   const [vehicle, setVehicle] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
-  // if (!vehicleId) return null;
-  // console.log(vehicleId);
-
+  const { vehicleId } = useLocalSearchParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VehicleDetails;
+export default vehicleDetails;

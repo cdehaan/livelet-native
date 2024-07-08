@@ -40,7 +40,7 @@ const Vehicles = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => 
       <TouchableOpacity key={vehicle.id} style={{
         width: "70%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
         padding: 7
-      }} onPress={() => router.push(`vehicleDetails/${vehicle.id}`)}>
+      }} onPress={() => router.push(`/vehicleDetails?vehicleId=${vehicle.id}`)}>
         {/* <TouchableOpacity key={vehicle.id} style={{
         width: "70%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
         padding: 7
