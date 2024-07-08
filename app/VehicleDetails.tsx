@@ -1,15 +1,18 @@
-import { View, Text, TouchableOpacity, Modal, ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity, Modal, ActivityIndicator, Button, StyleSheet } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '@/contexts/UserContext';
 import { AntDesign } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-const VehicleDetails = ({ vehicleId, setVehicleId }: { vehicleId: number, setVehicleId: any }) => {
+const VehicleDetails = ({ vehicleId }: { vehicleId: number }) => {
+  // const VehicleDetails = ({ vehicleId, setVehicleId }: { vehicleId: number, setVehicleId: any }) => {
   const { token } = useContext(UserContext);
   const [vehicle, setVehicle] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  if (!vehicleId) return null;
-  console.log(vehicleId);
+  // if (!vehicleId) return null;
+  // console.log(vehicleId);
 
 
   useEffect(() => {
@@ -46,22 +49,39 @@ const VehicleDetails = ({ vehicleId, setVehicleId }: { vehicleId: number, setVeh
   );
 
   return (
-    <Modal animationType='slide' transparent={true} >
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.7)', }}>
-        <View style={{ width: "70%", borderColor: "#888", borderWidth: 1, padding: 7, borderRadius: 12, backgroundColor: 'white' }}>
-          <TouchableOpacity onPress={() => {setVehicleId(null)}} style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
-            <AntDesign name="close" size={24} color="black" />
-          </TouchableOpacity>
-          <Text style={{ textAlign: 'center', marginVertical: 7, fontWeight: 'bold' }}>VehicleDetails</Text>
-          {!isLoading && loadingMessage}
-          <Text style={{ textAlign: 'center' }}>{vehicle.category}</Text>
-          <Text style={{ textAlign: 'center', marginBottom: 5 }}>{vehicle.title}</Text>
-        </View>
-      </View>
+    <View style={styles.container}>
+      {/* <TouchableOpacity onPress={() => { setVehicleId(null) }} style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
+        <AntDesign name="close" size={24} color="black" />
+      </TouchableOpacity> */}
+      <Text style={{ textAlign: 'center', marginVertical: 7, fontWeight: 'bold' }}>VehicleDetails</Text>
+      {!isLoading && loadingMessage}
+      <Text style={{ textAlign: 'center' }}>{vehicle.category}</Text>
+      <Text style={{ textAlign: 'center', marginBottom: 5 }}>{vehicle.title}</Text>
+      <Button title="Back" onPress={() => router.back()} />
+    </View>
 
-
-    </Modal>
+    // <Modal animationType='slide' transparent={true} >
+    //   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.7)', }}>
+    //     <View style={{ width: "70%", borderColor: "#888", borderWidth: 1, padding: 7, borderRadius: 12, backgroundColor: 'white' }}>
+    //       <TouchableOpacity onPress={() => {setVehicleId(null)}} style={{ position: 'absolute', top: 10, right: 10, zIndex: 10 }}>
+    //         <AntDesign name="close" size={24} color="black" />
+    //       </TouchableOpacity>
+    //       <Text style={{ textAlign: 'center', marginVertical: 7, fontWeight: 'bold' }}>VehicleDetails</Text>
+    //       {!isLoading && loadingMessage}
+    //       <Text style={{ textAlign: 'center' }}>{vehicle.category}</Text>
+    //       <Text style={{ textAlign: 'center', marginBottom: 5 }}>{vehicle.title}</Text>
+    //     </View>
+    //   </View>
+    // </Modal>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default VehicleDetails;

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { View, Text, Button, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { UserContext } from '@/contexts/UserContext';
-import VehicleDetails from './VehicleDetails';
+import VehicleDetails from './vehicleDetails';
 
 const Vehicles = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => {
   const router = useRouter();
@@ -40,7 +40,11 @@ const Vehicles = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => 
       <TouchableOpacity key={vehicle.id} style={{
         width: "70%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
         padding: 7
-      }} onPress={() => setVehicleId(vehicle.id)}>
+      }} onPress={() => router.push(`vehicleDetails/${vehicle.id}`)}>
+        {/* <TouchableOpacity key={vehicle.id} style={{
+        width: "70%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
+        padding: 7
+      }} onPress={() => setVehicleId(vehicle.id)}> */}
         <View style={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
           <Image
             style={{ width: 50, height: 50 }}
@@ -66,7 +70,7 @@ const Vehicles = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => 
           </ScrollView>
         </View>
       </View>
-      {vehicleId === null ? null : <VehicleDetails vehicleId={vehicleId} setVehicleId={setVehicleId} />}
+      {/* {vehicleId === null ? null : <VehicleDetails vehicleId={vehicleId} setVehicleId={setVehicleId} />} */}
     </>
   );
 };
