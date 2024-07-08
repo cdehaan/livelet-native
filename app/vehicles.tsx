@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { View, Text, Button, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { UserContext } from '@/contexts/UserContext';
-import VehicleDetails from './vehicleDetails';
 
 const Vehicles = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => {
   const router = useRouter();
@@ -40,7 +39,7 @@ const Vehicles = ({ onLogout }: { onLogout: (isLoggedIn: boolean) => void }) => 
       <TouchableOpacity key={vehicle.id} style={{
         width: "70%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
         padding: 7
-      }} onPress={() => router.push(`/vehicleDetails?vehicleId=${vehicle.id}`)}>
+      }} onPress={() => router.push(`/vehicleDetails/${vehicle.id}`)}>
         {/* <TouchableOpacity key={vehicle.id} style={{
         width: "70%", borderColor: "#888", borderWidth: 1, marginVertical: 4, borderRadius: 12,
         padding: 7
